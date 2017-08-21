@@ -7,7 +7,6 @@ LABEL name="CentOS Base Image" \
 
 RUN yum -y install git
 && yum -y install bzip2
-&& yum
 curl -L \
 https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer \
 | bash 
@@ -18,6 +17,23 @@ https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installe
 && source ~/.bashrc
 && pyenv install anaconda3-4.4.0
 && pyenv globol anaconda3-4.4.0
+&& conda create --name project python=3.5 anaconda -y
+&& source activate project
+
+
+RUN pip install tensorflow ; 
+pip install keras ;
+pip install requests ;
+pip install beautifulsoup4 ;
+pip install pymysql ;
+pip install pymongo ;
+
+#mkdir workspace dir 
+RUN mkdir ~/project
+
+VOLUME ~/project
+
+CMD ["/bin/bash"]
 
 
 
